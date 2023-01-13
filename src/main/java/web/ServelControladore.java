@@ -17,7 +17,19 @@ public class ServelControladore extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         List<Cliente> clientes = new ClienteDAO().listar();
         req.setAttribute("clientes", clientes);
+        req.setAttribute("totalClientes", clientes.size());
+        req.setAttribute("saldoTotal", calcularSaldoTotal(clientes));
         req.getRequestDispatcher("clientes.jsp").forward(req, resp);
+    }
+    
+    private double calcularSaldoTotal(List<Cliente> clientes){
+        double saldoTotal = 0;
+        
+        for(Cliente cl: clientes){
+            saldoTotal += cl.getSaldo();
+        }
+        
+        return saldoTotal;
     }
     
     @Override
