@@ -10,7 +10,7 @@ public class ClienteDAO {
 
     private static final String SQL_SELECT = "SELECT * FROM cliente";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM cliente WHERE id_cliente = ?";
-    private static final String SQL_INSER = "INSERT INTO cliente(nombe, apellido, email, telefono, saldo) VALUE (?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO cliente(nombre, apellido, email, telefono, saldo) VALUE (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE cliente SET nombre = ?, apellido = ?, email = ?, telefono = ?, saldo = ? WHERE id_cliente = ?";
     private static final String SQL_DELETE = "DELETE FROM cliente WHERE id_cliente = ?";
 
@@ -90,7 +90,7 @@ public class ClienteDAO {
 
         try {
             conn = Conexion.getConexion();
-            ps = conn.prepareStatement(SQL_INSER);
+            ps = conn.prepareStatement(SQL_INSERT);
             ps.setString(1, cl.getNombre());
             ps.setString(2, cl.getApellido());
             ps.setString(3, cl.getEmail());
