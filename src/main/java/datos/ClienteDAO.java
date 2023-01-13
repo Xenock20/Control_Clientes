@@ -58,19 +58,18 @@ public class ClienteDAO {
             ps = conn.prepareStatement(SQL_SELECT_BY_ID);
             ps.setInt(1, cl.getIdCliente());
             rs = ps.executeQuery();
-            rs.absolute(1);
-
-            String nombre = rs.getString("nombre");
-            String apellido = rs.getString("apellido");
-            String email = rs.getString("email");
-            String telefono = rs.getString("telefono");
-            double saldo = rs.getDouble("saldo");
-            
-            cl.setNombre(nombre);
-            cl.setApellido(apellido);
-            cl.setEmail(email);
-            cl.setTelefono(telefono);
-            cl.setSaldo(saldo);
+            if (rs.next()) { //se valida si hay resultados
+                    String nombre = rs.getString("nombre");
+                    String apellido = rs.getString("apellido");
+                    String email = rs.getString("email");
+                    String telefono = rs.getString("telefono");
+                    double saldo = rs.getDouble("saldo");
+                    cl.setNombre(nombre);
+                    cl.setApellido(apellido);
+                    cl.setEmail(email);
+                    cl.setTelefono(telefono);
+                    cl.setSaldo(saldo);
+            }
 
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -82,8 +81,8 @@ public class ClienteDAO {
 
         return cl;
     }
-    
-    public int insertar(Cliente cl){
+
+    public int insertar(Cliente cl) {
         Connection conn = null;
         PreparedStatement ps = null;
         int rows = 0;
@@ -96,7 +95,7 @@ public class ClienteDAO {
             ps.setString(3, cl.getEmail());
             ps.setString(4, cl.getTelefono());
             ps.setDouble(5, cl.getSaldo());
-            
+
             rows = ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -105,11 +104,11 @@ public class ClienteDAO {
             close(ps);
             close(conn);
         }
-        
+
         return rows;
     }
-    
-    public int actualizar(Cliente cl){
+
+    public int actualizar(Cliente cl) {
         Connection conn = null;
         PreparedStatement ps = null;
         int rows = 0;
@@ -123,7 +122,7 @@ public class ClienteDAO {
             ps.setString(4, cl.getTelefono());
             ps.setDouble(5, cl.getSaldo());
             ps.setInt(6, cl.getIdCliente());
-            
+
             rows = ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -132,11 +131,11 @@ public class ClienteDAO {
             close(ps);
             close(conn);
         }
-        
+
         return rows;
     }
-    
-        public int eliminar(Cliente cl){
+
+    public int eliminar(Cliente cl) {
         Connection conn = null;
         PreparedStatement ps = null;
         int rows = 0;
@@ -145,7 +144,7 @@ public class ClienteDAO {
             conn = Conexion.getConexion();
             ps = conn.prepareStatement(SQL_DELETE);
             ps.setInt(1, cl.getIdCliente());
-            
+
             rows = ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -154,7 +153,7 @@ public class ClienteDAO {
             close(ps);
             close(conn);
         }
-        
+
         return rows;
     }
 }

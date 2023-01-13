@@ -15,9 +15,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Email</th>
-                                <th>Telefono</th>
                                 <th>Saldo</th>
                                 <th></th>
                             </tr>
@@ -27,9 +24,6 @@
                                 <tr>
                                     <td>${cliente.idCliente}</td>
                                     <td>${cliente.nombre}</td>
-                                    <td>${cliente.apellido}</td>
-                                    <td>${cliente.email}</td>
-                                    <td>${cliente.telefono}</td>
                                     <td> <fmt:formatNumber value="${cliente.saldo}" type="currency"/></td>
                                     <td>
                                         <a href="${pageContext.request.contextPath}/ServelControlador?accion=editar&idCliente=${cliente.idCliente}" class="btn btn-secondary">

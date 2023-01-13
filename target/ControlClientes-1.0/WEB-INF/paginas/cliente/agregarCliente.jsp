@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label for="saldo">Saldo</label>
-                        <input type="number" name="saldo" class="form-control" required>
+                        <input type="number" name="saldo" class="form-control" required step="any">
                     </div>
                 </div>
                 
